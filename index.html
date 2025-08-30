@@ -1,0 +1,1103 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Completionist DB - Track Your Entertainment Journey</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a:hover {
+            color: #4ecdc4;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #4ecdc4;
+            border: 2px solid #4ecdc4;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(78, 205, 196, 0.4);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            margin-top: 80px;
+            height: 70vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-carousel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 500%;
+            height: 100%;
+            display: flex;
+            animation: slide 25s infinite;
+        }
+
+        .hero-slide {
+            width: 20%;
+            height: 100%;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .hero-slide:hover {
+            transform: scale(1.02);
+        }
+
+        .slide-bg {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0,0,0,0.7), rgba(26,26,46,0.5));
+        }
+
+        .slide-content {
+            position: absolute;
+            bottom: 2rem;
+            left: 2rem;
+            right: 2rem;
+            color: white;
+            z-index: 5;
+        }
+
+        .slide-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .slide-info {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 800px;
+            padding: 0 2rem;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 1rem 3rem 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            color: white;
+            font-size: 1.1rem;
+            outline: none;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar:focus {
+            border-color: rgba(78, 205, 196, 0.5);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .search-bar::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border: none;
+            padding: 0.8rem;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .search-btn:hover {
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        /* Categories Section */
+        .categories-section {
+            padding: 4rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .category-group {
+            margin-bottom: 4rem;
+        }
+
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .category-title {
+            font-size: 2rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .category-icon {
+            font-size: 1.5rem;
+            color: #4ecdc4;
+        }
+
+        .view-more {
+            color: #4ecdc4;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .view-more:hover {
+            color: #ff6b6b;
+            transform: translateX(5px);
+        }
+
+        .cards-container {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+            scrollbar-width: thin;
+            scrollbar-color: #4ecdc4 transparent;
+        }
+
+        .cards-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .cards-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .cards-container::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-radius: 10px;
+        }
+
+        .card {
+            min-width: 220px;
+            height: 320px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .card:hover .card-image::before {
+            opacity: 1;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .card-info {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-rating {
+            background: rgba(78, 205, 196, 0.2);
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 4rem 2rem;
+            margin: 4rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #4ecdc4;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 3rem 2rem 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #4ecdc4;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section a {
+            color: #ffffff;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+            opacity: 0.8;
+        }
+
+        .footer-section a:hover {
+            color: #4ecdc4;
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1rem;
+            text-align: center;
+            opacity: 0.7;
+        }
+
+        /* Animations */
+        @keyframes slide {
+            0%, 15% { transform: translateX(0); }
+            20%, 35% { transform: translateX(-20%); }
+            40%, 55% { transform: translateX(-40%); }
+            60%, 75% { transform: translateX(-60%); }
+            80%, 95% { transform: translateX(-80%); }
+            100% { transform: translateX(0); }
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(78, 205, 196, 0.5); }
+            to { text-shadow: 0 0 30px rgba(255, 107, 107, 0.8); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .category-title {
+                font-size: 1.5rem;
+            }
+            
+            .cards-container {
+                gap: 1rem;
+            }
+            
+            .card {
+                min-width: 180px;
+                height: 280px;
+            }
+
+            .slide-title {
+                font-size: 1.8rem;
+            }
+
+            .slide-info {
+                font-size: 0.9rem;
+            }
+
+            .hero-content {
+                padding: 2rem 1rem;
+            }
+        }
+
+        /* Loading animation for cards */
+        .card {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        .card:nth-child(4) { animation-delay: 0.4s; }
+        .card:nth-child(5) { animation-delay: 0.5s; }
+        .card:nth-child(6) { animation-delay: 0.6s; }
+        .card:nth-child(7) { animation-delay: 0.7s; }
+        .card:nth-child(8) { animation-delay: 0.8s; }
+        .card:nth-child(9) { animation-delay: 0.9s; }
+        .card:nth-child(10) { animation-delay: 1.0s; }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">
+                <i class="fas fa-database"></i> Completionist DB
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#" data-page="movies">Movies</a></li>
+                <li><a href="#" data-page="shows">TV Shows</a></li>
+                <li><a href="#" data-page="games">Games</a></li>
+                <li><a href="#" data-page="lists">My Lists</a></li>
+                <li><a href="#" data-page="discover">Discover</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <a href="#" class="btn btn-secondary" id="loginBtn">Login</a>
+                <a href="#" class="btn btn-primary" id="registerBtn">Register</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <div class="hero-carousel" id="heroCarousel">
+            <!-- Slides will be populated by JavaScript -->
+        </div>
+        <div class="hero-content">
+            <h1 class="hero-title">Track Your Entertainment Journey</h1>
+            <p class="hero-subtitle">Discover, track, and organize all your movies, TV shows, and games in one place</p>
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="Search movies, shows, games..." id="searchInput">
+                <button class="search-btn" id="searchBtn"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories-section">
+        <!-- Movies Section -->
+        <div class="category-group">
+            <div class="category-header">
+                <h2 class="category-title">
+                    <i class="fas fa-film category-icon"></i>
+                    Trending Movies
+                </h2>
+                <a href="#" class="view-more" data-category="movies">
+                    View More <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="cards-container" id="moviesContainer">
+                <!-- Movies will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- TV Shows Section -->
+        <div class="category-group">
+            <div class="category-header">
+                <h2 class="category-title">
+                    <i class="fas fa-tv category-icon"></i>
+                    Popular TV Shows
+                </h2>
+                <a href="#" class="view-more" data-category="shows">
+                    View More <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="cards-container" id="showsContainer">
+                <!-- TV Shows will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Games Section -->
+        <div class="category-group">
+            <div class="category-header">
+                <h2 class="category-title">
+                    <i class="fas fa-gamepad category-icon"></i>
+                    Hot Games
+                </h2>
+                <a href="#" class="view-more" data-category="games">
+                    View More <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="cards-container" id="gamesContainer">
+                <!-- Games will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-number" data-target="50000">0</div>
+                <div class="stat-label">Movies & Shows</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" data-target="25000">0</div>
+                <div class="stat-label">Games</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" data-target="1000000">0</div>
+                <div class="stat-label">Active Users</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" data-target="5000000">0</div>
+                <div class="stat-label">Items Tracked</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Discover</h3>
+                <a href="#" data-page="trending-movies">Trending Movies</a>
+                <a href="#" data-page="popular-shows">Popular Shows</a>
+                <a href="#" data-page="hot-games">Hot Games</a>
+                <a href="#" data-page="new-releases">New Releases</a>
+            </div>
+            <div class="footer-section">
+                <h3>Features</h3>
+                <a href="#" data-page="track-progress">Track Progress</a>
+                <a href="#" data-page="create-lists">Create Lists</a>
+                <a href="#" data-page="rate-review">Rate & Review</a>
+                <a href="#" data-page="recommendations">Get Recommendations</a>
+            </div>
+            <div class="footer-section">
+                <h3>Community</h3>
+                <a href="#" data-page="forums">Forums</a>
+                <a href="#" data-page="reviews">Reviews</a>
+                <a href="#" data-page="community-lists">Lists</a>
+                <a href="#" data-page="discussions">Discussions</a>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <a href="#" data-page="help">Help Center</a>
+                <a href="#" data-page="contact">Contact Us</a>
+                <a href="#" data-page="bugs">Bug Reports</a>
+                <a href="#" data-page="features">Feature Requests</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Completionist DB. All rights reserved. | Powered by TMDB & RAWG APIs</p>
+        </div>
+    </footer>
+
+    <script>
+        // Sample data for demonstration
+        const heroSlides = [
+            {
+                title: "Avengers: Endgame",
+                info: "2019 • Action • 8.4/10",
+                background: "linear-gradient(135deg, #ff6b6b, #ff8e8e)",
+                type: "movie"
+            },
+            {
+                title: "The Last of Us",
+                info: "2023 • Drama • 8.8/10",
+                background: "linear-gradient(135deg, #4ecdc4, #6fd4d4)",
+                type: "show"
+            },
+            {
+                title: "Cyberpunk 2077",
+                info: "2020 • RPG • 86/100",
+                background: "linear-gradient(135deg, #45b7d1, #65c7e1)",
+                type: "game"
+            },
+            {
+                title: "Stranger Things",
+                info: "2016 • Sci-Fi • 8.7/10",
+                background: "linear-gradient(135deg, #ff9ff3, #ffb3f5)",
+                type: "show"
+            },
+            {
+                title: "God of War",
+                info: "2018 • Action • 94/100",
+                background: "linear-gradient(135deg, #f9ca24, #fdd85d)",
+                type: "game"
+            }
+        ];
+
+        const sampleMovies = [
+            { id: 1, title: "Avengers: Endgame", year: "2019", rating: "8.4", icon: "🦸" },
+            { id: 2, title: "Dune", year: "2021", rating: "8.0", icon: "🏜️" },
+            { id: 3, title: "Spider-Man: No Way Home", year: "2021", rating: "8.2", icon: "🕷️" },
+            { id: 4, title: "The Batman", year: "2022", rating: "7.8", icon: "🦇" },
+            { id: 5, title: "Top Gun: Maverick", year: "2022", rating: "8.3", icon: "✈️" },
+            { id: 6, title: "Avatar: The Way of Water", year: "2022", rating: "7.6", icon: "🌊" },
+            { id: 7, title: "Black Panther", year: "2018", rating: "7.3", icon: "🐾" },
+            { id: 8, title: "Inception", year: "2010", rating: "8.8", icon: "🌀" },
+            { id: 9, title: "The Dark Knight", year: "2008", rating: "9.0", icon: "🃏" },
+            { id: 10, title: "Interstellar", year: "2014", rating: "8.6", icon: "🚀" }
+        ];
+
+        const sampleShows = [
+            { id: 1, title: "Stranger Things", year: "2016", rating: "8.7", icon: "👾" },
+            { id: 2, title: "The Last of Us", year: "2023", rating: "8.8", icon: "🧟" },
+            { id: 3, title: "Wednesday", year: "2022", rating: "8.1", icon: "🖤" },
+            { id: 4, title: "House of the Dragon", year: "2022", rating: "8.4", icon: "🐲" },
+            { id: 5, title: "The Bear", year: "2022", rating: "8.5", icon: "🐻" },
+            { id: 6, title: "Euphoria", year: "2019", rating: "8.4", icon: "💫" },
+            { id: 7, title: "The Crown", year: "2016", rating: "8.7", icon: "👑" },
+            { id: 8, title: "Breaking Bad", year: "2008", rating: "9.5", icon: "⚗️" },
+            { id: 9, title: "Game of Thrones", year: "2011", rating: "9.2", icon: "⚔️" },
+            { id: 10, title: "The Office", year: "2005", rating: "9.0", icon: "📊" }
+        ];
+
+        const sampleGames = [
+            { id: 1, title: "Elden Ring", year: "2022", rating: "96", icon: "🗡️" },
+            { id: 2, title: "God of War Ragnarök", year: "2022", rating: "94", icon: "⚡" },
+            { id: 3, title: "Horizon Forbidden West", year: "2022", rating: "88", icon: "🏹" },
+            { id: 4, title: "Cyberpunk 2077", year: "2020", rating: "86", icon: "🌆" },
+            { id: 5, title: "The Witcher 3", year: "2015", rating: "93", icon: "🐺" },
+            { id: 6, title: "Red Dead Redemption 2", year: "2018", rating: "97", icon: "🤠" },
+            { id: 7, title: "Baldur's Gate 3", year: "2023", rating: "96", icon: "🎲" },
+            { id: 8, title: "The Legend of Zelda: TOTK", year: "2023", rating: "96", icon: "⚡" },
+            { id: 9, title: "Spider-Man 2", year: "2023", rating: "90", icon: "🕸️" },
+            { id: 10, title: "Starfield", year: "2023", rating: "82", icon: "🌌" }
+        ];
+
+// Initialize hero carousel
+function initHeroCarousel() {
+    const carousel = document.getElementById('heroCarousel');
+    heroSlides.forEach(slide => {
+        const slideElement = document.createElement('div');
+        slideElement.className = 'hero-slide';
+        slideElement.onclick = () => handleSlideClick(slide);
+        
+        slideElement.innerHTML = `
+            <div class="slide-bg" style="background: ${slide.background};">
+                <div class="hero-overlay"></div>
+                <div class="slide-content">
+                    <div class="slide-title">${slide.title}</div>
+                    <div class="slide-info">${slide.info}</div>
+                </div>
+            </div>
+        `;
+        
+        carousel.appendChild(slideElement);
+    });
+}
+
+// Handle slide click
+function handleSlideClick(slide) {
+    showNotification(`Opening ${slide.title} details page`, 'info');
+}
+
+// Create cards
+function createCard(item, type) {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.onclick = () => handleCardClick(item, type);
+    
+    const ratingLabel = type === 'games' ? 'Metacritic' : 'IMDb';
+    
+    card.innerHTML = `
+        <div class="card-image">${item.icon}</div>
+        <div class="card-title">${item.title}</div>
+        <div class="card-info">
+            <span>${item.year}</span>
+            <span class="card-rating">${item.rating}</span>
+        </div>
+    `;
+    
+    return card;
+}
+
+// Handle card click
+function handleCardClick(item, type) {
+    showNotification(`Opening ${item.title} details page`, 'info');
+}
+
+// Populate containers
+function populateContainer(containerId, items, type) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = '';
+    items.forEach(item => {
+        container.appendChild(createCard(item, type));
+    });
+}
+
+// Search functionality
+function handleSearch() {
+    const query = document.getElementById('searchInput').value.trim();
+    if (query) {
+        showNotification(`Searching for: "${query}"`, 'info');
+    } else {
+        showNotification('Please enter a search term', 'warning');
+    }
+}
+
+// Navigation handling
+function handleNavigation(page) {
+    const pages = {
+        'movies': 'Movies Catalog - Browse all movies with filters and genres',
+        'shows': 'TV Shows Catalog - Discover series and web shows',
+        'games': 'Games Catalog - Explore video games across all platforms',
+        'lists': 'My Lists - Manage your watched, watching, and wishlist items',
+        'discover': 'Discover - Get personalized recommendations'
+    };
+    
+    if (pages[page]) {
+        showNotification(`Navigating to ${pages[page]}`, 'info');
+    }
+}
+
+// Handle view more clicks
+function handleViewMore(category) {
+    const categoryNames = {
+        'movies': 'Movies',
+        'shows': 'TV Shows', 
+        'games': 'Games'
+    };
+    
+    showNotification(`Opening ${categoryNames[category]} catalog page`, 'info');
+}
+
+// Notification system
+function showNotification(message, type = 'info') {
+    const existing = document.querySelector('.notification');
+    if (existing) {
+        existing.remove();
+    }
+
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.style.cssText = `
+        position: fixed;
+        top: 100px;
+        right: 2rem;
+        background: ${type === 'info' ? 'linear-gradient(45deg, #4ecdc4, #45b7d1)' : 
+                   type === 'warning' ? 'linear-gradient(45deg, #f9ca24, #f0932b)' : 
+                   'linear-gradient(45deg, #ff6b6b, #ee5a52)'};
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        z-index: 2000;
+        animation: slideInRight 0.3s ease;
+        max-width: 400px;
+        font-weight: 600;
+        backdrop-filter: blur(10px);
+    `;
+    
+    notification.textContent = message;
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.style.animation = 'slideOutRight 0.3s ease';
+            setTimeout(() => notification.remove(), 300);
+        }
+    }, 3000);
+}
+
+// Add notification animations
+const notificationStyles = document.createElement('style');
+notificationStyles.textContent = `
+    @keyframes slideInRight {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes slideOutRight {
+        from { transform: translateX(0); opacity: 1; }
+        to { transform: translateX(100%); opacity: 0; }
+    }
+`;
+document.head.appendChild(notificationStyles);
+
+// Counter animation
+function animateCounter(element) {
+    const target = parseInt(element.getAttribute('data-target'));
+    const increment = target / 200;
+    let current = 0;
+    
+    const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+            element.textContent = target.toLocaleString() + '+';
+            clearInterval(timer);
+        } else {
+            element.textContent = Math.floor(current).toLocaleString();
+        }
+    }, 10);
+}
+
+// Smooth navbar scroll effect
+function handleNavbarScroll() {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 100) {
+        navbar.style.background = 'rgba(10, 10, 10, 0.98)';
+        navbar.style.backdropFilter = 'blur(15px)';
+    } else {
+        navbar.style.background = 'rgba(10, 10, 10, 0.95)';
+        navbar.style.backdropFilter = 'blur(10px)';
+    }
+}
+
+// Initialize app
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize hero carousel
+    initHeroCarousel();
+    
+    // Populate content containers
+    populateContainer('moviesContainer', sampleMovies, 'movies');
+    populateContainer('showsContainer', sampleShows, 'shows');
+    populateContainer('gamesContainer', sampleGames, 'games');
+    
+    // Add event listeners
+    document.getElementById('searchBtn').addEventListener('click', handleSearch);
+    document.getElementById('searchInput').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            handleSearch();
+        }
+    });
+
+    // Navigation links
+    document.querySelectorAll('[data-page]').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const page = this.getAttribute('data-page');
+            handleNavigation(page);
+        });
+    });
+
+    // View more links
+    document.querySelectorAll('[data-category]').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const category = this.getAttribute('data-category');
+            handleViewMore(category);
+        });
+    });
+
+    // Auth buttons
+    document.getElementById('loginBtn').addEventListener('click', function(e) {
+        e.preventDefault();
+        showNotification('Login functionality will be available soon!', 'info');
+    });
+
+    document.getElementById('registerBtn').addEventListener('click', function(e) {
+        e.preventDefault();
+        showNotification('Registration functionality will be available soon!', 'info');
+    });
+
+    // Scroll effects
+    window.addEventListener('scroll', handleNavbarScroll);
+
+    // Animate stats when they come into view
+    const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const statNumbers = entry.target.querySelectorAll('.stat-number');
+                statNumbers.forEach(animateCounter);
+                statsObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    const statsSection = document.querySelector('.stats-section');
+    if (statsSection) {
+        statsObserver.observe(statsSection);
+    }
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Welcome message
+    setTimeout(() => {
+        showNotification('Welcome to Completionist DB! Start tracking your entertainment journey.', 'info');
+    }, 1000);
+});
+
+// Handle window resize
+window.addEventListener('resize', function() {
+    const heroCarousel = document.getElementById('heroCarousel');
+    if (heroCarousel) {
+        heroCarousel.style.animation = 'none';
+        setTimeout(() => {
+            heroCarousel.style.animation = 'slide 25s infinite';
+        }, 100);
+    }
+});
+
+// Add keyboard navigation
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        const notification = document.querySelector('.notification');
+        if (notification) {
+            notification.remove();
+        }
+    }
+    
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        document.getElementById('searchInput').focus();
+    }
+});
+
+// Export functions for potential use in other pages
+window.CompletionistDB = {
+    showNotification,
+    handleNavigation
+};
